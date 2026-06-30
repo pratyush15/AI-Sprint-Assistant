@@ -190,16 +190,6 @@ ollama pull nomic-embed-text
 
 Create a `.env` file in the project root (use `.env.example` as a reference):
 
-```env
-APP_NAME=AI Sprint Assistant
-DATABASE_URL=sqlite:///./tickets.db
-OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=llama3.2
-OLLAMA_EMBED_MODEL=nomic-embed-text
-CHROMA_DB_PATH=data/chroma
-API_BASE_URL=http://localhost:8000
-```
-
 ### 7. Start Ollama
 
 ```bash
