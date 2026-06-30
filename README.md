@@ -188,7 +188,7 @@ ollama pull nomic-embed-text
 
 ### 6. Configure Environment Variables
 
-Create a `.env` file in the project root (use `.env.example` as a reference):
+Create a `.env` file in the project root (use `.env.example` as a reference)
 
 ### 7. Start Ollama
 
