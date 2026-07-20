@@ -365,3 +365,88 @@ Provide a helpful professional answer.
 """
 
 
+# ---------------------------------------------------------------------------
+# Multi-agent pipeline prompts
+# Used by: context_analyzer_node, clarifier_node, reviewer_node in nodes.py
+# ---------------------------------------------------------------------------
+
+CONTEXT_ANALYSIS_PROMPT = """
+You are a Senior Business Analyst reviewing a Jira ticket before any work
+begins on it.
+
+Assess whether the ticket has enough information for an engineer to act on
+confidently (estimate it, prioritize it, or write acceptance criteria for it).
+
+Ticket Title:
+{title}
+
+Ticket Description:
+{description}
+
+Rules:
+- Only mark it "Insufficient" if critical information is genuinely missing
+  (e.g. no clear goal, no affected system/feature, no acceptance signal at
+  all). Minor missing details are NOT a reason to mark it Insufficient.
+- The first line of your response must be exactly "Completeness: Sufficient"
+  or exactly "Completeness: Insufficient" — nothing else on that line.
+
+Return ONLY in this format:
+
+Completeness: Sufficient / Insufficient
+
+Key Context:
+- point 1
+- point 2
+
+Missing Info:
+- point 1 (write "None" if nothing is missing)
+"""
+
+
+CLARIFYING_QUESTIONS_PROMPT = """
+You are a Senior Business Analyst.
+
+The following ticket does not currently have enough information to estimate,
+prioritize, or action confidently.
+
+Ticket Title:
+{title}
+
+Ticket Description:
+{description}
+
+Analyst Notes:
+{context_notes}
+
+Generate exactly 3 clarifying questions a developer should ask the ticket
+reporter before this ticket can be worked on.
+
+Return ONLY:
+
+Clarifying Questions:
+1. ...
+2. ...
+3. ...
+"""
+
+
+REVIEW_PROMPT = """
+You are a meticulous Reviewer. Another AI agent produced the draft output
+below for a Jira task of type "{task}".
+
+Draft Output:
+{draft}
+
+Check the draft against these general quality rules:
+- It must follow the exact structure/format its task requires (no missing
+  sections, no extra commentary, no meta-text like "Here is...").
+- It must not hedge, ask follow-up questions, or request more information.
+- It must contain only what was asked for — nothing extra.
+
+If the draft already fully complies, return it unchanged.
+If it violates any rule, correct it and return the corrected version.
+
+Return ONLY the final output — no notes about what you changed.
+"""
+
+
