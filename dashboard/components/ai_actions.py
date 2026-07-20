@@ -15,7 +15,6 @@ AI_TASKS = {
 
 def action_buttons():
     clicked_task = None
-    st.subheader("AI Actions")
 
     for label, task in AI_TASKS.items():
         if st.button(
