@@ -1,4 +1,3 @@
-
 from app.agents.graph import graph
 
 def run_ai_task(
@@ -14,6 +13,9 @@ def run_ai_task(
             "title": title,
             "description": description,
             "question": question,
+            "context_notes": "",
+            "needs_clarification": False,
+            "draft_content": "",
             "content": ""
         }
     )
